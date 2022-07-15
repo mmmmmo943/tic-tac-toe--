@@ -4,9 +4,23 @@ import Square from "./components/square"
 
 function App() {
   const [board,setBoard] =useState(["","","","","","","","","",""]);
-  
+  const [player,setPlayer]=useState("X");
+
   const selectSquare=(square)=>{
-     
+     setBoard(
+      board.map((val,idx)=>{
+        if(idx==square&&val==""){
+          return player;
+        }
+        return val;
+      })
+     );
+
+     if (player=="X"){
+      setPlayer("O");
+     }else{
+      setPlayer("X");
+     }
   }
   return (
     <div className="App">
