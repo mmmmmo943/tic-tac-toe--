@@ -4,13 +4,14 @@ import Square from "./components/square";
 import {Patterns}from"./components/patterns";
 
 function App() {
-  const [board,setBoard] =useState(["","","","","","","","","",""]);
-  const [player,setPlayer]=useState("X");
+  const [board,setBoard] =useState(["","","","","","","","",""]);
+  const [player,setPlayer]=useState("O");
   const [result,setResult]=useState({winner:"none",state:"none"});
 
 
   useEffect(()=>{
     win();
+    check();
     if (player=="X"){
       setPlayer("O");
      }else{
@@ -47,6 +48,20 @@ function App() {
          setResult({winner:player,state:"won"})
       }
     })
+  }
+
+  const check=()=>{
+    let filled=true;
+    board.forEach((square)=>{
+      if(square==""){
+        filled=false;
+      }
+    });
+
+    if(filled){
+      setResult({winner:"nobody wins",state:"fullover"});
+    };
+
   }
   return (
     <div className="App">
